@@ -1,0 +1,110 @@
+// TO decide amount you can withdraw from an atm card and whether the transaction is free for that month
+#include <stdio.h>
+#include <libpq-fe.h>
+#include<string.h>
+
+int main(){
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+long card_no , Account_no ,Balance,amount,card_limit;
+char query[500] , name[30] ,buf[200],IFSC_Code[11],Narration[10],query1[500], date[50];
+char month1[3];
+int mdno,msal,sal,c;
+EXEC SQL END DECLARE SECTION;
+
+   printf("Enter card_no.");
+    scanf("%ld",&card_no);
+//strcpy(query,"SELECT TID,Account_No from transactions WHERE Account_No =");
+    strcpy(query,"SELECT BALANCE , card_limit FROM ACCOUNT natural join card where  card_no = ");
+    sprintf(buf,"%ld",card_no);
+    strcat(query,buf);
+    printf("%s\n",query);
+    EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" IDENTIFIED BY "shefali";
+    EXEC SQL set search_path to bank;
+
+
+    EXEC SQL PREPARE query_prep FROM :query;
+    EXEC SQL DECLARE emp_cur CURSOR FOR query_prep;
+    EXEC SQL OPEN emp_cur;
+    while (sqlca.sqlcode==0)
+        {
+        EXEC SQL FETCH emp_cur INTO :Balance,:card_limit;
+           //printf("%10ld,%10ld",TID,Account_No);
+
+    printf("%10ld",Balance);
+    }
+
+      if(Balance<10)
+      printf("You may do as many transactions as you want");
+      else
+      {
+        scanf("%s",&date);
+         strcpy(query1,"SELECT count(*) , sum(amount) FROM Transactions where  card_no = ");
+    sprintf(buf,"%ld",card_no);
+
+    strcat(query1,buf);
+//SELECT EXTRACT(MONTH FROM TIMESTAMP '2001-02-16 20:38:40');
+
+        strcat(query1," AND EXTRACT(MONTH FROM time_stamp)= \'");
+        //strncpy(month1[0], &date[5], 1) ;
+        //strncpy(month1[1], &date[6], 1) ;
+         //month1[2]='\0';
+         month1[0]=date[6];
+         month1[1]=date[7];
+         month1[2]='\0';
+        printf("%s",month1);
+        sprintf(buf,"%s",month1);
+        strcat(query1,buf);
+        strcat(query1," \' group by card_no ");
+    printf("%s\n",query1);
+
+
+    EXEC SQL set search_path to bank;
+
+
+    EXEC SQL PREPARE query_prep FROM :query1;
+    EXEC SQL DECLARE emp_cur1 CURSOR FOR query_prep;
+    EXEC SQL OPEN emp_cur1;
+    while (sqlca.sqlcode==0)
+        {
+        EXEC SQL FETCH emp_cur1 INTO :c,:amount;
+           //printf("%10ld,%10ld",TID,Account_No);
+
+     printf("\n %10d",c);printf("\n %10ld",amount);
+
+
+
+      }
+ if(c<3)
+        {
+          printf("Number of free transactions are:%d",(3-c));
+
+         if(amount<card_limit&&(card_limit-amount)<Balance)
+         printf("Amount for free transaction is: %ld" ,card_limit - amount);
+         else if(amount<card_limit&&(card_limit-amount)>Balance&&Balance>0)
+          printf("Amount for free transaction is: %ld" ,Balance);
+
+         else
+         printf("You cannot take out money");
+        }
+       else
+     {
+     printf("No more free transactions are there ");
+     if(amount<card_limit&&(card_limit-amount)<Balance)
+         printf("Amount for transaction is: %ld" ,card_limit - amount);
+    else if(amount<card_limit&&(card_limit-amount)>Balance&&Balance>0)
+          printf("Amount for free transaction is: %ld" ,Balance);
+
+         else
+         printf("You cannot take out money");
+
+      }
+
+
+
+    }
+
+
+        return 0;
+}

@@ -1,0 +1,39 @@
+/*GET DETAILS OF A PARTICULAR ACCOUNT*/
+#include <stdio.h>
+#include <libpq-fe.h>
+#include <string.h>
+int main(){
+
+  EXEC SQL BEGIN DECLARE SECTION;
+  long int   Account_No,Account_to, BALANCE,DD_No,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No ,i_Account_No,TID;
+  float Amount;
+  int Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE;
+  char FD_ID[20],Time_Stamp[50];
+  char query[500] , name[30] ,buf[200],IFSC_Code[11],Narration[10];
+  int mdno,msal,sal;
+  EXEC SQL END DECLARE SECTION;
+   printf("Enter account no.");
+	  scanf("%ld",&i_Account_No);
+	    strcpy(query,"SELECT TID,Account_No ,Account_to,Amount ,BALANCE,Time_Stamp ,DD_No ,FD_ID ,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan from transactions WHERE Account_No = ");
+	    sprintf(buf,"%ld",i_Account_No);
+	    strcat(query,buf);
+	printf("%s\n",query);
+
+	EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" IDENTIFIED BY "shefali";
+	EXEC SQL set search_path to bank;
+
+	EXEC SQL PREPARE query_prep FROM :query;
+	EXEC SQL DECLARE emp_cur CURSOR FOR query_prep;
+	EXEC SQL OPEN emp_cur;
+	while (sqlca.sqlcode==0)
+  {
+		EXEC SQL FETCH emp_cur INTO :TID,:Account_No ,:Account_to,:Amount ,:BALANCE,:Time_Stamp ,:DD_No ,:FD_ID ,:Cheque_No, :Card_No, :No_Of_Notes,:Loan_Account_No,:Installment_No_Loan;
+
+//printf("%10ld,%10ld",TID,Account_No);
+
+		printf("%10ld,%10ld,%10ld,%10f,%10ld,%10s,%10ld,%10s,%10ld,%10ld,%10ld,%10ld,%10d\n",TID,Account_No ,Account_to,Amount ,BALANCE,Time_Stamp ,DD_No ,FD_ID ,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan);
+
+
+	}
+		return 0;
+}

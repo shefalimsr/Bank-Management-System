@@ -1,0 +1,80 @@
+/*GET TOTAL DEBIT AND CREDIT OF A PARTICULAR BRANCH IN A BANK
+#include <stdio.h>
+#include <string.h>
+#include <libpq-fe.h>
+
+int main()
+{
+
+    EXEC SQL BEGIN DECLARE SECTION;
+
+        char ifc[11] ,ifsc[15] , date[50];
+
+         int i;
+        long int cr , de ;
+        char query[500] ,buf[200],query1[200];
+ EXEC SQL END DECLARE SECTION;
+printf("Enter ifsc code");
+scanf("%s",&ifsc);
+printf("Enter date");
+scanf("%s",&date);
+
+   printf("Total credit:");
+
+    strcpy(query," select  ifsc_code, sum(amount)  from transactions where  narration='CREDIT' AND ifsc_code =");
+     sprintf(buf,"%s",ifsc);
+     strcat(query,buf);
+     strcat(query," AND date(Time_stamp) =");
+     sprintf(buf,"%s",date);
+     strcat(query,buf);
+    strcat(query," group by ifsc_code");
+    printf("%s\n",query);
+
+    EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" IDENTIFIED BY "shefali";
+    EXEC SQL set search_path to bank;
+
+        EXEC SQL PREPARE query_prep FROM :query;
+	EXEC SQL DECLARE emp_cursor CURSOR FOR query_prep;
+EXEC SQL OPEN emp_cursor;
+
+        while(sqlca.sqlcode==0)
+{
+        EXEC SQL FETCH FROM emp_cursor INTO :ifc, :cr;
+
+        //printf("%s",ifc);
+        printf("IFSC: %10s,%10d \n  ",ifc,cr);
+
+}
+
+printf("Total debit:");
+
+strcpy(query1," select  ifsc_code, sum(amount)  from transactions where  narration='DEBIT' AND ifsc_code =");
+     sprintf(buf,"%s",ifsc);
+     strcat(query1,buf);
+     strcat(query1," AND date(Time_stamp) =");
+     sprintf(buf,"%s",date);
+     strcat(query1,buf);
+    strcat(query1," group by ifsc_code");
+    printf("%s\n",query);
+EXEC SQL set search_path to bank;
+
+        EXEC SQL PREPARE query_prep FROM :query1;
+	EXEC SQL DECLARE emp_cursor1 CURSOR FOR query_prep;
+EXEC SQL OPEN emp_cursor1;
+
+        while(sqlca.sqlcode==0)
+{
+        EXEC SQL FETCH FROM emp_cursor INTO :ifc, :cr;
+
+        if(ifc[0]!='/0');
+        //printf("%s",ifc);
+        printf("IFSC: %10s,%10d \n  ",ifc,cr);
+
+}
+
+
+
+
+
+    return 0;
+}

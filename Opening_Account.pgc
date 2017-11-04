@@ -1,0 +1,55 @@
+//To create a new account
+#include <stdio.h>
+#include <string.h>
+#include <libpq-fe.h>
+#include <math.h>
+#include<time.h>
+#include<stdlib.h>
+
+int main()
+{
+
+
+
+EXEC SQL BEGIN DECLARE SECTION;
+	long int iacc, cif ;
+	 char at[2],ifsc[15] , *date;
+
+EXEC SQL END DECLARE SECTION;
+EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" IDENTIFIED BY "shefali";
+
+/*Insert into Account values(34783453455,'SA',96584,'2002-07-10',45687412365,'SASH0000001');
+*/
+
+printf("enter your account no. , account type , IFSC and your CIF no \n");
+scanf("%ld%s%s%ld",&iacc,&at,&ifsc,&cif);
+
+
+date = (char *)malloc(sizeof(char) * 16);
+
+time_t ltime;
+ltime=time( 0);
+struct tm *tm;
+tm=localtime(&ltime);
+sprintf(date,"'%04d-%02d-%02d'", tm->tm_year+1900, tm->tm_mon,tm->tm_mday);
+printf("%s",date);
+
+EXEC SQL set search_path to bank;
+
+EXEC SQL set transaction read write;
+EXEC SQL insert into ACCOUNT values(:iacc,:at ,0,:date,:cif,:ifsc);
+
+if (sqlca.sqlcode < 0)
+ {
+	printf("\n\naccount not created \n");
+	EXEC SQL rollback work;
+	return 0 ;
+}
+else
+	printf("\n created Succesfully\n");
+
+EXEC SQL commit;
+
+ return 0;
+
+}

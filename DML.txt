@@ -1,0 +1,219 @@
+
+Insert into CUSTOMER values(12345678961,'RAKESH PRAKASH KUMAR','1963-05-21','M',499118665246,'AAAPL1234C','MARRIED',74182369141);
+Insert into CUSTOMER values(45687412365,'PUSHPA DEVI','1975-04-06','F',666714962373,'BBBPL1234C','MARRIED',78567856151);
+Insert into CUSTOMER values(74182369145,'PRAVEEN KUMAR YADAV','1991-06-05','M',124585479658,'CCCPL1234C','SINGLE',12345678962);
+Insert into CUSTOMER values(78567856153,'OM PRAKASH JHA','1972-12-13','M',456287469854,'DDDPL1234C','MARRIED',45687412361);
+Insert into CUSTOMER values(78567856154,'MAHESH KUMAR','1989-10-05','M',125785239517,'FFFPL1234C','SINGLE',45687412361);
+Insert into CUSTOMER values(65546646846,'MANISH KUMAR YADAV','1975-10-09','M',465865463545,'EEEPL1234C','SINGLE',24596845951);
+Insert into CUSTOMER values(74182369123,'Meenakshi Mishra','1990-05-18','F',154236982685,'AABPL1234C','MARRIED',85691452698);
+Insert into CUSTOMER values(74182369124,'Usha Garg','1990-07-03','F',854612397456,'ABBPL1234C','UNMARRIED',85631496258);
+Insert into CUSTOMER values(74182369126,'Mohan Pant','1970-11-22','M',951753752486,'ABAPL1234C','MARRIED',32156548785);
+Insert into CUSTOMER values(0,'0','1970-11-22','M',0,'0','0',0);
+
+
+
+Insert into Customer_Income_Source values(45687412365,'Blogging',200000);
+Insert into Customer_Income_Source values(78567856154,'Blogging',200000);
+Insert into Customer_Income_Source values(78567856154,'Online Business',400000);
+Insert into Customer_Income_Source values(12345678961,'Online Business',500000);
+Insert into Customer_Income_Source values(12345678961,'Household shop',300000);
+Insert into Customer_Income_Source values(78567856153,'Service',800000);
+Insert into Customer_Income_Source values(74182369145,'Educative coaching',800000);
+Insert into Customer_Income_Source values(65546646846,'Service',800000);
+Insert into Customer_Income_Source values(74182369123,'Household shop',300000);
+Insert into Customer_Income_Source values(74182369124,'Online Business',700000);
+Insert into Customer_Income_Source values(74182369126,'Online Business',700000);
+
+Insert into Customer_Address values(12345678961,'IV/7 ,CAZRI COLONY ,JODHPUR ,RAJASTHAN');
+Insert into Customer_Address values(12345678961,'3,SURAJ NAGAR, JODHPUR , RAJASTHAN');
+Insert into Customer_Address values(45687412365,'3 , CHOUPASNI HOUSING BOARD, JAIPUR, RAJASTHAN');
+Insert into Customer_Address values(74182369145,'A-105 , SAMPAT SOCIETY , GHATKOPAR EAST , MUMBAI');
+Insert into Customer_Address values(78567856153,'502, CITY HEIGHTS , LOWER PAREL , MUMBAI ');
+Insert into Customer_Address values(78567856154,'B-102 ,SHREE RANG APARTMENTS, GIFT CITY , GANDHINAGAR');
+Insert into Customer_Address values(74182369145,'A-404 , SAMPARK SOCIETY , KOLATA');
+Insert into Customer_Address values(65546646846,'IV/7 ,AFRI COLONY ,JODHPUR ,RAJASTHAN');
+Insert into Customer_Address values(74182369123,'11/15 Megha Cooperative Society , Kalyan - west Thane Maharashtra  - 421301');
+Insert into Customer_Address values(74182369124,'31/2 , Nehru Enclave , Ulubari Nagar ,Guwahati');
+Insert into Customer_Address values(74182369126, 'h no .12 , Pocket - a Subhash Nagar , Mumbai' );
+
+
+Insert into CUSTOMER_PHONE_NO values(12345678961,9413142342);
+Insert into CUSTOMER_PHONE_NO values(12345678961,9571474718);
+Insert into CUSTOMER_PHONE_NO values(45687412365,9979310783);
+Insert into CUSTOMER_PHONE_NO values(45687412365,9167473307);
+Insert into CUSTOMER_PHONE_NO values(45687412365,9929453670);
+Insert into CUSTOMER_PHONE_NO values(74182369145,7359250343);
+Insert into CUSTOMER_PHONE_NO values(78567856153,9898977343);
+Insert into CUSTOMER_PHONE_NO values(78567856153,9571238462);
+Insert into CUSTOMER_PHONE_NO values(74182369123,9849439829);
+Insert into CUSTOMER_PHONE_NO values(74182369124,9474537834 );
+Insert into CUSTOMER_PHONE_NO values(74182369126,8437949845 );
+
+Insert into Customer_email values(12345678961,'rakesh@gmail.com');
+Insert into Customer_email values(45687412365,'pushpa@gmail.com');
+Insert into Customer_email values(74182369145,'praveen@gmail.com');
+Insert into Customer_email values(74182369145,'pky@gmail.com');
+Insert into Customer_email values(78567856153,'opjha@gmail.com');
+Insert into Customer_email values(78567856154,'mahesh15@gmail.com');
+Insert into Customer_email values(65546646846,'manish@gmail.com');
+Insert into Customer_email values(74182369123,'mm903@gmail.com');
+Insert into Customer_email values(74182369124,'usha9769@yahoo.co.in' );
+Insert into Customer_email values(74182369126,'mohan_Pant@gmail.com' );
+
+Insert into Branch values('SASH0000001','SASH - Infocity','Gandhinagar','Gujarat','AE04985IRJ');
+Insert into Branch values('SASH0000002','SASH - dwarka','New Delhi','New Delhi','JILE327323 ');
+Insert into Branch values('SASH0000007','SASH-  C R AVENUE','Kolkata','West Bengal','RSUE37329');
+Insert into Branch values('0','0','0','0','0');
+
+Insert into ATM values(4015,'  INFOCITY GANDHINAGAR,UNIT GWGF BY 2 GR FLOOR,INFOCITY,GANDHINAGAR382009','SASH0000001');
+Insert into ATM values(1563,'Manish Metro Plaza-2, Plot No.02, Sector-12','SASH0000002');
+Insert into ATM values(4017,'150, CHITTARANJAN AVENUE, KOLKATA WEST BENGAL 700073','SASH0000007');
+
+
+Insert into EMPLOYEE values('AE04985IRJ','Meenakshi Mishra','1990-05-18','F','Married','11/15 Megha Cooperative Society , Kalyan - west Thane Maharashtra  - 421301',90000,'2014-05-18',74182369123,'SASH0000001');
+Insert into EMPLOYEE values('HU39S3294','Usha Garg','1990-07-03','F','Unmarried','31/2 , Nehru Enclave , Ulubari Nagar ,Guwahati',48000,'2015-07-18',74182369124,'SASH0000001');
+Insert into EMPLOYEE values('JILE327323','Mohan Pant','1970-11-22','M','Married','h no .12 , Pocket - a Subhash Nagar , Mumbai',60000,'2004-06-18',74182369126,'SASH0000002');
+Insert into EMPLOYEE values('JKEU63YW','Om Prakash Jha','1972-12-13','M','Married','b - 401 shree rang apartment , Gift city Gandhinagar',45000,'2000-04-18',78567856153,'SASH0000007');
+Insert into EMPLOYEE values('RSUE37329','Mahesh Kumar','1989-10-05','M','Married','a -404 , Sampark Society , Kolkata ',59000,'2011-09-18',78567856154,'SASH0000007');
+
+
+
+Insert into Employee_email values('AE04985IRJ','mm903@gmail.com');
+Insert into Employee_email values('HU39S3294','usha9769@yahoo.co.in');
+Insert into Employee_email values('JILE327323','mohan_Pant@gmail.com');
+Insert into Employee_email values('JKEU63YW','opjha@gmail.com');
+Insert into Employee_email values('RSUE37329','mahesh15@gmail.com');
+
+
+Insert into EMPLOYEE_PHONE_NO values('AE04985IRJ',9849439829);
+Insert into EMPLOYEE_PHONE_NO values('HU39S3294',9474537834);
+Insert into EMPLOYEE_PHONE_NO values('JILE327323',8437949845);
+Insert into EMPLOYEE_PHONE_NO values('JILE327323',9438437384);
+Insert into EMPLOYEE_PHONE_NO values('JKEU63YW',8489313543);
+Insert into EMPLOYEE_PHONE_NO values('JKEU63YW',8437499989);
+Insert into EMPLOYEE_PHONE_NO values('RSUE37329',9858584902);
+
+
+Insert into EMP_DEPENDENT values('AE04985IRJ',1,'Sonakshi Mishra','DAUGHTER','1990-05-26','STUDENT','IIT Kanpur');
+Insert into EMP_DEPENDENT values('AE04985IRJ',2,'Sakshi Mishra','DAUGHTER','1992-06-18','SERVICE','STATE BANK OF INDIA');
+Insert into EMP_DEPENDENT values('AE04985IRJ',3,'Meena Mishra','DAUGHTER','1989-09-18','STUDENT','IIIT Vadodara');
+Insert into EMP_DEPENDENT values('HU39S3294',1,'Parichay Garg','SON','2000-07-03','STUDENT','IIIT Hyderabad');
+Insert into EMP_DEPENDENT values('HU39S3294',2,'Nikki Garg','MOTHER','1980-07-03','SERVICE','AIIMS Delhi');
+Insert into EMP_DEPENDENT values('JILE327323',1,'Rohini Pant','WIFE', '1978-09-22','HOUSE-WIFE','HOME');
+Insert into EMP_DEPENDENT values('JKEU63YW',1,'Ram Prakash Jha','SON', '1997-11-23','STUDENT','NIT Srinagar');
+Insert into EMP_DEPENDENT values('RSUE37329',1,'Ramesh Kumar','SON','2010-12-08','STUDENT','CITY MONTESSORI SCHOOL');
+Insert into EMP_DEPENDENT values('RSUE37329',2,'Rani Kumari','DAUGHTER','2009-10-05','STUDENT','DELHI PUBLIC SCHOOL');
+
+
+Insert into Account_Type values('CT','CURRENT',8);
+Insert into Account_Type values('SA','SAVINGS',7);
+Insert into Account_Type values('0','0',0);
+
+Insert into Account values(84721827920 ,'CT', 80213,'1990-05-22' ,12345678961 ,'SASH0000001' );
+Insert into Account values(73347598343,'SA',86954,'2000-02-16' , 12345678961, 'SASH0000001');
+Insert into Account values(34783453455,'SA',96584,'2002-07-10',45687412365,'SASH0000001');
+Insert into Account values(49385984351,'CT', 14237 ,' 2017-05-01' ,74182369145,'SASH0000007');
+Insert into Account values(24987231278,'CT', 65321,'2000-11-27',78567856153,'SASH0000002');
+Insert into Account values(38473985771,'SA', 21512,' 2010-10-03 ' ,78567856154  ,'SASH0000001');
+Insert into Account values(0,'0', 0,' 2010-10-03 ' ,0 ,'0');
+
+
+Insert into Card values(5196190170688321,'DEBIT','2035-05-31',1234,84721827920,50000);
+Insert into Card values(5136519620001301,'DEBIT','2038-04-30',4125,34783453455,100000);
+Insert into Card values(5187452396587412,'CREDIT','2034-07-31',8512,24987231278,150000);
+Insert into Card values(5218369852694856,'DEBIT','2021-07-31',9632,38473985771,90000);
+Insert into Card values(5863213659859632,'CREDIT','2040-09-25',7856,49385984351,120000);
+Insert into Card values(0,'CREDIT','2040-09-25',0,0,0);
+
+
+
+
+Insert into INSURANCE values(41534356534,'HEALTH','2006-12-25',200000,'2016-12-25',1000000,45687412365,78567856151,'SASH0000001','CLAIMED');
+Insert into INSURANCE values(15655466546,'MOTOR','2011-10-24',100000,NULL,500000,45687412365,78567856151,'SASH0000001','UNCLAIMED');
+Insert into INSURANCE values(53465545775,'HOME','2015-09-14',100000,NULL,500000,45687412365,78567856151,'SASH0000002','UNCLAIMED');
+Insert into INSURANCE values(26875276278,'PERSONAL ACCIDENT','2015-04-19',200000,NULL,1000000,12345678961,74182369141,'SASH0000002','CLAIMED');
+Insert into INSURANCE values(25175188718,'TRAVEL','2010-06-17',100000,NULL,500000,12345678961,74182369141,'SASH0000001','UCLAIMED');
+Insert into INSURANCE values(14715715187,'COMMERCIAL','2007-08-26',100000,NULL,500000,65546646846,24596845951,'SASH0000007','UNCLAIMED');
+Insert into INSURANCE values(0,'0','2007-08-26',0,NULL,0,0,0,'0','0');
+
+
+Insert into INSURANCE_INSTALLMENT values(41534356534, 1 , 10000, '2006-12-25' , '2007-04-25' );
+Insert into INSURANCE_INSTALLMENT values(41534356534, 2 , 10000, '2007-04-25' , '2007-08-25' );
+Insert into INSURANCE_INSTALLMENT values(14715715187 , 1 , 10000, '2007-08-26' , '2008-08-26' );
+Insert into INSURANCE_INSTALLMENT values(14715715187 , 2 , 10000, '2008-08-26' , '2009-08-26' );
+Insert into INSURANCE_INSTALLMENT values(14715715187 , 3 , 10000, '2009-08-26' , '2010-08-26' );
+Insert into INSURANCE_INSTALLMENT values(14715715187 ,4  , 10000, '2010-08-26' , '2011-08-26' );
+Insert into INSURANCE_INSTALLMENT values(14715715187 , 5 , 10000, '2011-08-26' , '2012-08-26' );
+Insert into INSURANCE_INSTALLMENT values(0, 0, 0, '2011-08-26' , '2012-08-26' );
+
+
+
+Insert into Loan_Type values('HL','HOME LOAN',7.5);
+Insert into Loan_Type values('EL','EDUCATION LOAN',6.25);
+Insert into Loan_Type values('CL','CAR LOAN',4.75);
+Insert into Loan_Type values('PL','PERSONAL LOAN',8.32);
+Insert into Loan_Type values('0','0',0);
+
+
+
+Insert into LOAN values(21314654498644,78567856153,800000,'EL', '2010-05-15',5,666714962373,'SASH0000001');
+Insert into LOAN values(54452316457445,78567856154,750000,'CL', '2000-02-28',10,499118665246,'SASH0000001');
+Insert into LOAN values(46548478534165,74182369145,100000,'EL','2015-07-23',1,456287469854,'SASH0000007');
+Insert into LOAN values(16382683762578,65546646846,200000,'HL', '2011-01-31',5,125785239517,'SASH0000001');
+Insert into LOAN values(0,0,0,'0', '2011-01-31',0,0,'0');
+
+
+
+Insert into LOAN_Installment values(21314654498644,1,'2010-10-15','2010-11-15',105000,0,'full');
+Insert into LOAN_Installment values(21314654498644,2,'2011-03-04','2011-05-15',105000,0,'full');
+Insert into LOAN_Installment values(46548478534165,1,'2011-10-10','2015-11-23', 26562 ,0 ,'full');
+Insert into LOAN_Installment values(54452316457445,1,'2000-07-11','2000-08-28', 55313,0,'full');
+Insert into LOAN_Installment values(54452316457445,2,'2001-01-20','2001-02-28', 55313, 0,'full');
+Insert into LOAN_Installment values(16382683762578,1,'2011-04-13','2011-07-13',27500,0  ,'full');
+Insert into LOAN_Installment values(0,0,'2011-04-13','2011-07-13',0,0  ,'0');
+
+
+Insert into Loan_Income_Source values(21314654498644,'Blogging',100000);
+Insert into Loan_Income_Source values(46548478534165,'Online Business',55000);
+Insert into Loan_Income_Source values(54452316457445,'Household shop',60000);
+Insert into Loan_Income_Source values(54452316457445,'Investment in Share Market',78000);
+Insert into Loan_Income_Source values(16382683762578,'Service',90000);
+
+Insert into Fixed_Deposit values('3345123489573884',78567856154 ,'2007-01-23','2017-01-23',903382,8.5,'SASH0000001');
+Insert into Fixed_Deposit values('3754837548397554',12345678961 ,'2014-04-13','2019-04-13',34545,9.0,'SASH0000007');
+Insert into Fixed_Deposit values('9843798437594353',45687412365,'2004-05-21','2006-05-21',3454656,7.0,'SASH0000002');
+Insert into Fixed_Deposit values('3475943759834759',45687412365,'2015-03-11','2020-03-11',24546,6.0,'SASH0000001');
+Insert into Fixed_Deposit values('3483475983475984',78567856153,'1998-02-14','2008-02-14',134556,6.5,'SASH0000002');
+
+
+
+ALTER SEQUENCE TRANSACTIONS_TID_seq RESTART WITH 1000000000;
+
+
+
+Insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration)
+ values(84721827920,0 ,5000,75213,'2016-02-12 11:20:01',0,'0',0,5196190170688321,0 , 0,0 ,0 ,0 ,'SASH0000001','DEBIT');
+Insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration)
+ values(73347598343,24987231278,3000,83954,'2016-04-03 15:20:01',957412,'0' ,0,0 ,0 ,0 ,0 ,0 ,0 ,'SASH0000002','TRANSFERS');
+Insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration)
+ values(24987231278,0,3000,68321,' 2016-04-03 15:20:01',957412,'0' ,0 ,0 ,0 ,0 ,0 ,0 , 0,'SASH0000002','TRANSFERED');
+Insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration)
+ values(34783453455,0 ,6000,27512,' 2017-04-03 21:20:01',0 ,'0' ,0 ,0 ,3, 0, 0,0 , 0,'SASH0000007','CREDIT');
+
+
+Insert into ASSETS_Log values(21314654498644,'Real Property');
+Insert into ASSETS_Log values(21314654498644,'Machinery');
+Insert into ASSETS_Log values(54452316457445,'Jewellery');
+Insert into ASSETS_Log values(54452316457445,'Machinery');
+Insert into ASSETS_Log values(46548478534165,'Real Estate');
+Insert into ASSETS_Log values(46548478534165,'Currencies');
+Insert into ASSETS_Log values(46548478534165,'Precious Metals');
+Insert into ASSETS_Log values(16382683762578,'Government bonds');
+Insert into ASSETS_Log values(16382683762578,'Stocks');
+
+ALTER SEQUENCE TransactsAt_ReceiptNo_seq RESTART WITH 10000000000000;
+Insert into TransactsAt(TID,ATM_No) values(1000000000,4015);
+
+
+
+

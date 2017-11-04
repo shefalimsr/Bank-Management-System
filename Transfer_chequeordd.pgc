@@ -1,0 +1,254 @@
+//Transfer a particular amount from one account to another and decide the mode(dd/cheque)
+#include <stdio.h>
+#include <string.h>
+#include <libpq-fe.h>
+#include <math.h>
+#include<time.h>
+#include<stdlib.h>
+
+
+
+
+int main()
+{
+
+    EXEC SQL BEGIN DECLARE SECTION;
+
+        char ifsc1[15],ifsc2[15],*timestamp;
+	int t,r,ch;
+	int c=0;
+	long int princi, acc, accto , cno , dno , bal1, bal2,amt;
+        char query[500] , query1[500],buf[200], buf1[200];
+	double ret;
+  	 EXEC SQL END DECLARE SECTION;
+	printf("enter your account_no and account_no you want to transfer to : ");
+	scanf("%ld %ld",&acc,&accto);
+
+
+	 strcpy(query," SELECT IFSC_Code,Balance from account where account_no= ");
+	sprintf(buf,"%ld",acc);
+	strcat(query,buf);
+
+	strcpy(query1," SELECT IFSC_Code, Balance from account where account_no= ");
+	sprintf(buf1,"%ld",accto);
+	strcat(query1,buf1);
+
+
+	printf("enter amount : ");
+	scanf("%ld",&amt);
+	printf("transfer via DD or CHEQUE(1/2) ? ");
+
+	scanf("%d",&ch);
+	if(ch==1)
+	{	printf("enter DD NO:");
+		scanf(" %ld",&dno);
+		//printf("   %ld  ",dno);
+	}
+ 	else if(ch==2)
+	{	printf("enter CHEQUE NO:");
+		scanf(" %ld",&cno);
+		//printf("   %ld  ",cno);
+
+	}
+
+
+
+	EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" 			IDENTIFIED BY "shefali";
+
+	    EXEC SQL set search_path to bank;
+	    EXEC SQL PREPARE query_prep FROM :query;
+	    EXEC SQL DECLARE emp_cursor CURSOR FOR query_prep;
+	    EXEC SQL OPEN emp_cursor;
+
+
+
+	    while(sqlca.sqlcode==0)
+	 {
+	EXEC SQL FETCH FROM emp_cursor INTO :ifsc1, :bal1 ;
+
+	}
+
+
+	EXEC SQL set search_path to bank;
+	 EXEC SQL PREPARE query_prep FROM :query1;
+    EXEC SQL DECLARE emp_cur1 CURSOR FOR query_prep;
+    EXEC SQL OPEN emp_cur1;
+    while (sqlca.sqlcode==0)
+        {
+        EXEC SQL FETCH emp_cur1 INTO :ifsc2 , :bal2 ;
+
+
+         }
+
+timestamp = (char *)malloc(sizeof(char) * 16);
+
+time_t ltime;
+ltime=time(NULL);
+struct tm *tm;
+tm=localtime(&ltime);
+
+
+sprintf(timestamp,"'%04d-%02d-%02d %02d:%02d:%02d'", tm->tm_year+1900, tm->tm_mon,tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+
+bal1 = bal1 - amt;
+bal2 = bal2 + amt;
+
+
+
+if(strcmp(ifsc1,ifsc2)==0)
+  {
+    if(ch==1)
+    {
+        EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:acc,:accto ,:amt,:bal1,:timestamp,:dno,NULL,NULL,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc1, 'TRANSFERS' );
+if (sqlca.sqlcode < 0)
+			{
+				printf("\n\n transaction DID NOT GET ADDED\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			 printf("\n pehli TRANSACTION Added Succesfully\n");
+
+	EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:accto,NULL,:amt,:bal2,:timestamp,:dno,NULL,NULL,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc2, 'TRANSFERED' );
+
+			if (sqlca.sqlcode < 0)
+			{
+				printf("\n\nduji transaction not added\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			printf("\n TRANSACTION Added Succesfully\n");
+
+    }
+
+    else if(ch==2)
+    {
+        EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:acc,:accto ,:amt,:bal1,:timestamp,NULL,NULL,:cno,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc1, 'TRANSFERS' );
+if (sqlca.sqlcode < 0)
+			{
+				printf("\n\n transaction DID NOT GET ADDED\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			 printf("\n TRANSACTION Added Succesfully\n");
+
+        EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:accto,NULL ,:amt,:bal2,:timestamp,NULL,NULL,:cno,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc2, 'TRANSFERED TO' );
+
+		if (sqlca.sqlcode < 0)
+		{
+			printf("\n\n transaction DID NOT GET ADDED\n");
+			EXEC SQL rollback work;
+			return 0;
+		}
+		else
+			printf("\n TRANSACTION Added Succesfully\n");
+	}
+
+}
+
+else
+
+{
+	if(ch==1)
+	{
+		EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:acc,:accto ,:amt,:bal1,:timestamp,:dno,NULL,NULL,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc1, 'DEBIT' );
+	if (sqlca.sqlcode < 0)
+			{
+				printf("\n\n transaction DID NOT GET ADDED\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			 printf("\n TRANSACTION Added Succesfully\n");
+EXEC SQL commit;
+
+EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:accto,NULL,:amt,:bal2,:timestamp,:dno,NULL,NULL,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc2, 'CREDIT' );
+
+			if (sqlca.sqlcode < 0)
+			{
+				printf("\n\n transaction DID NOT GET ADDED\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			 printf("\n TRANSACTION Added Succesfully\n");
+EXEC SQL commit;
+
+	}
+else if(ch==2)
+    {
+
+	  EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:acc,:accto ,:amt,:bal1,:timestamp,NULL,NULL,:cno,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc1, 'CREDIT' );
+
+if (sqlca.sqlcode < 0)
+			{
+				printf("\n\n transaction DID NOT GET ADDED\n");
+				EXEC SQL rollback work;
+				return 0;
+			}
+			else
+			 printf("\n TRANSACTION Added Succesfully\n");
+
+
+	  EXEC SQL insert into TRANSACTIONS(Account_No,Account_to,Amount,BALANCE,Time_Stamp,DD_No,FD_ID,Cheque_No,Card_No,No_Of_Notes,Loan_Account_No,Installment_No_Loan,POLICY_NO,INSTALLMENT_NO_INSURANCE,IFSC_Code,Narration) values(:accto,NULL ,:amt,:bal2,:timestamp,NULL,NULL,:cno,NULL,NULL,NULL,NULL,NULL ,NULL ,:ifsc2, 'DEBIT' );
+
+		if (sqlca.sqlcode < 0)
+		{
+			printf("\n\n transaction DID NOT GET ADDED\n");
+			EXEC SQL rollback work;
+			return 0;
+		}
+		else
+			printf("\n TRANSACTION Added Succesfully\n");
+    }
+
+}
+
+
+
+EXEC SQL UPDATE Account
+    SET Balance = :bal1
+    WHERE Account_No= :acc;
+
+if (sqlca.sqlcode < 0)
+ {
+printf("\n\nbalance  not updated\n");
+EXEC SQL rollback work;
+return 0;
+}
+else
+  printf("\n balance updated\n");
+
+EXEC SQL UPDATE Account
+    SET Balance = :bal2
+    WHERE Account_No= :accto;
+
+if (sqlca.sqlcode < 0)
+ {
+printf("\n\nbalance  not updated\n");
+EXEC SQL rollback work;
+return 0;
+}
+else
+  printf("\n balance updated\n");
+
+EXEC SQL commit;
+
+ return 0;
+}
+
+
+/*
+
+different banks -
+
+34783453455
+49385984351
+
+same bank -
+84721827920
+73347598343
+
+*/

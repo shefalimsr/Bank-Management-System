@@ -1,0 +1,87 @@
+/*LOAN GIVING STRATEGY DECIDER :IF A PERSON HAS A PENALTY THEN HE WON'T BE GIVEN LAON*/
+#include <stdio.h>
+#include <string.h>
+#include <libpq-fe.h>
+
+int main()
+{
+
+    EXEC SQL BEGIN DECLARE SECTION;
+
+        char ifsc[15] , date[50];
+long i=0,j=0;
+        long int cr , de ,i_cif_no,cif_no,source;
+        char query[500] ,buf[200] , query1[500];
+
+    EXEC SQL END DECLARE SECTION;
+printf("Enter CIF_no");
+
+scanf("%ld",&i_cif_no);
+//i=0;
+    strcpy(query,"   select count(*) from (select s.cif_no from (select cif_no , sum(income) as source  from customer natural join customer_income_source group by cif_no ) as s  join  loan  on(s.cif_no=loan.cif_no) natural join loan_installment where source>1000 and s.cif_no = ");
+   sprintf(buf,"%ld",i_cif_no);
+
+	strcat(query,buf);
+    strcat(query,"  group by s.cif_no having sum (penalty)=0  ) as z ");
+    printf("%s\n",query);
+
+    EXEC SQL CONNECT TO "201551095@10.100.1.62" USER "201551095" IDENTIFIED BY "shefali";
+    EXEC SQL set search_path to bank;
+
+        EXEC SQL PREPARE query_prep FROM :query;
+	EXEC SQL DECLARE emp_cursor CURSOR FOR query_prep;
+EXEC SQL OPEN emp_cursor;
+
+        while(sqlca.sqlcode==0)
+{
+        EXEC SQL FETCH FROM emp_cursor INTO :i;
+
+       // printf("%10ld,%10ld \n  ",cif_no,source);
+
+
+
+}
+printf("%ld",i);
+if(i!=0)
+{printf("\nYou can be given loan\n");
+j=0;
+}
+if(i==0)
+{
+
+strcpy(query1,"select count(*) from (select s.cif_no from (select cif_no , sum(income) as source  from customer natural join customer_income_source group by cif_no ) as s  join  loan  on(s.cif_no=loan.cif_no) natural join loan_installment where source>1000 and s.cif_no = ");
+    sprintf(buf,"%ld",i_cif_no);
+
+	strcat(query1,buf);
+strcat(query1,"  group by s.cif_no having sum (penalty)!=0  ) as z ");
+    printf("%s\n",query1);
+    EXEC SQL set search_path to bank;
+
+        EXEC SQL PREPARE query_prep FROM :query1;
+	EXEC SQL DECLARE emp_cursor1 CURSOR FOR query_prep;
+EXEC SQL OPEN emp_cursor1;
+
+        while(sqlca.sqlcode==0)
+{
+        EXEC SQL FETCH FROM emp_cursor1 INTO :j;
+
+        printf("%ld",j);
+
+}
+
+
+
+}
+
+printf("%ld",j);
+
+if(j!=0)
+ printf("\nYou can't be given loan\n");
+
+    if(j==0&&i==0)
+    printf("\nYou are a new customer .You are welcome\n");
+
+    return 0;
+
+
+}
